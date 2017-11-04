@@ -1,0 +1,58 @@
+table.termeklista > tbody > tr.color-schame-arlistak > td:nth-child(even) {
+	background: #E6F1F9;
+}
+.color-schame-arlistak > td {
+	background: #E6F1F9;
+}
+
+table.termeklista > tbody > tr.color-schame-prospektus > td:nth-child(even) {
+	background: #ffe0eb;
+}
+.color-schame-prospektus > td {
+	background: #ffe0eb;
+}
+
+table.termeklista > tbody > tr.color-schame-documents > td:nth-child(even) {
+	background: #eefadc;
+}
+.color-schame-documents > td {
+	background: #eefadc;
+}
+
+table.termeklista > tbody > tr.color-schame-administration_documents > td:nth-child(even) {
+	background: #fef0d9;
+}
+.color-schame-administration_documents > td {
+	background: #fef0d9;
+}
+
+table.termeklista > tbody > tr.color-schame-marketing > td:nth-child(even) {
+	background: #f7e1e1;
+}
+.color-schame-marketing > td {
+	background: #f7e1e1;
+}
+
+table.termeklista > tbody > tr.color-schame-pp_hirlevel > td:nth-child(even) {
+	background: #fffceb;
+}
+.color-schame-pp_hirlevel > td {
+	background: #fffceb;
+}
+
+table.termeklista > tbody > tr.color-schame-reseller_prosp > td:nth-child(even) {
+	background: #f1e0fe;
+}
+.color-schame-reseller_prosp > td {
+	background: #f1e0fe;
+}
+
+table.termeklista > tbody > tr.color-schame-oktatasi_anyag > td:nth-child(even) {
+	background: #cfe0d3;
+}
+.color-schame-oktatasi_anyag > td {
+	background: #cfe0d3;
+}
+
+
+

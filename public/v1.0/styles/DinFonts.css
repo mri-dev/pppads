@@ -1,0 +1,46 @@
+/* DinTextCompPro-Regular */
+@font-face {
+  font-family: 'Din Comp';
+  src: url('../../../src/font/din/DinTextCompPro-Regular.eot');
+  src: url('../../../src/font/din/DinTextCompPro-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../../../src/font/din/DinTextCompPro-Regular.woff') format('woff'),
+       url('../../../src/font/din/DinTextCompPro-Regular.ttf') format('truetype'),
+       url('../../../src/font/din/DinTextCompPro-Regular.svg#Din Comp') format('svg');
+  font-style: normal;
+  font-weight: 400;
+}
+/* DinTextCompPro-Medium */
+@font-face {
+  font-family: 'Din Comp';
+  src: url('../../../src/font/din/DinTextCompPro-Medium.eot');
+  src: url('../../../src/font/din/DinTextCompPro-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../../../src/font/din/DinTextCompPro-Medium.woff') format('woff'),
+       url('../../../src/font/din/DinTextCompPro-Medium.ttf') format('truetype'),
+       url('../../../src/font/din/DinTextCompPro-Medium.svg#Din Comp') format('svg');
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* DinTextCompPro-Bold */
+@font-face {
+  font-family: 'Din Comp';
+  src: url('../../../src/font/din/DinTextCompPro-Bold.eot');
+  src: url('../../../src/font/din/DinTextCompPro-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../../../src/font/din/DinTextCompPro-Bold.woff') format('woff'),
+       url('../../../src/font/din/DinTextCompPro-Bold.ttf') format('truetype'),
+       url('../../../src/font/din/DinTextCompPro-Bold.svg#Din Comp') format('svg');
+  font-style: bold;
+  font-weight: 700;
+}
+
+/* DinTextCondPro-Regular */
+@font-face {
+  font-family: 'Din Cond';
+  src: url('../../../src/font/din/DinTextCondPro-Regular.eot');
+  src: url('../../../src/font/din/DinTextCondPro-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../../../src/font/din/DinTextCondPro-Regular.woff') format('woff'),
+       url('../../../src/font/din/DinTextCondPro-Regular.ttf') format('truetype'),
+       url('../../../src/font/din/DinTextCondPro-Regular.svg#Din Cond') format('svg');
+  font-style: normal;
+  font-weight: 400;
+}

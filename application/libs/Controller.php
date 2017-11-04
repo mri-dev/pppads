@@ -45,6 +45,7 @@ class Controller {
 
         $this->out( 'db',   $this->db );
         $this->out( 'user', $this->User->get( self::$user_opt ) );
+        $this->out( 'u', $this->User );
 
         $templates = new Template( VIEW . 'templates/' );
         $this->out( 'templates', $templates );

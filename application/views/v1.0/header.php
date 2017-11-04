@@ -100,39 +100,45 @@
 		}
     </script>
 </head>
-<body class="<? if(!$this->adm->logged): ?>blured-bg<? endif; ?>">
+<body class="<? if(!$this->user): ?>blured-bg<? endif; ?>">
 <div id="top" class="container-fluid">
 	<div class="row">
-		<? if(!$this->adm->logged): ?>
+		<? if(!$this->user): ?>
 		<div class="col-md-12 center"><img height="34" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>"></div>
 		<? else: ?>
     	<div class="col-md-7 left">
     		<img height="34" class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
     		<div class="link">
-    			<a href="<?=HOMEDOMAIN?>" target="_blank">www.<?=str_replace(array('https://','www.'), '', $this->settings['page_url'])?></a>
+    			<strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
     		</div>
     	</div>
 
         <div class="col-md-5" align="right">
         	<div class="shower">
-            	<i class="fa fa-user"></i>
-            	<?=$this->adm->admin?>
-                <i class="fa fa-caret-down"></i>
-                <div class="dmenu">
-                	<ul>
-                		<li><a href="/home/exit">Kijelentkezés</a></li>
-                	</ul>
-                </div>
-            </div>
+          	<i class="fa fa-user"></i>
+          	<?=$this->user['data']['nev']?>
+              <i class="fa fa-caret-down"></i>
+              <div class="dmenu">
+              	<ul>
+              		<li><a href="/home/exit">Kijelentkezés</a></li>
+              	</ul>
+              </div>
+          </div>
         	<div class="shower no-bg">
         		<a href="<?=FILE_BROWSER_IMAGE?>" data-fancybox-type="iframe" class="iframe-btn">Galéria <i class="fa fa-picture-o"></i></a>
-            </div>
+          </div>
+          <div class="shower no-bg">
+            <a href="/mystatus">Fiók státusz: <span class="user-status <?=$this->user['data']['user_group']?>"><?php echo $this->u->getUserGroupe(); ?></span></a>
+          </div>
+          <div class="shower no-bg cash">
+            <a href="/egyenleg">Egyenleg: <strong><?=number_format($this->u->getEgyenleg(), 0,""," ")."<span class='smd'><sup>.".end(explode(".",number_format($this->u->getEgyenleg(), 2, ".","")))?></sup></span> FT</strong></a>
+          </div>
         </div>
         <? endif; ?>
     </div>
 </div>
 <!-- Login module -->
-<? if(!$this->adm->logged): ?>
+<? if(!$this->user): ?>
 <div id="login" class="container-fluid">
 	<div class="row">
 	    <div class="bg col-md-4 col-md-offset-4">
@@ -141,7 +147,7 @@
             <form action="" method="post">
 	            <div class="input-group">
 	              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-				  <input type="text" class="form-control" name="user">
+				  <input type="text" class="form-control" name="email">
 				</div>
                 <br>
                 <div class="input-group">
@@ -160,13 +166,16 @@
 <!--/Login module -->
 <div id="content">
 <div class="container-fluid">
-	<? if($this->adm->logged): ?>
+	<? if($this->user): ?>
     <div class="slideMenu">
     	<div class="slideMenuToggle" title="Kinyit/Becsuk"><i class="fa fa-arrows-h"></i></div>
         <div class="clr"></div>
    		<div class="menu">
         	<ul>
             	<li class="<?=($this->gets[0] == 'home')?'on':''?>"><a href="/" title="Dashboard"><span class="ni">1</span><i class="fa fa-life-saver"></i> Dashboard</a></li>
+              <li class="<?=($this->gets[0] == 'websites')?'on':''?>"><a href="/websites" title="Weboldalaim"><span class="ni">1</span><i class="fa fa-globe"></i> Weboldalaim</a></li>
+              <li class="<?=($this->gets[0] == 'install')?'on':''?>"><a href="/install" title="Telepítés"><span class="ni">1</span><i class="fa fa-code"></i> Telepítés</a></li>
+              <li class="<?=($this->gets[0] == 'egyenleg')?'on':''?>"><a href="/egyenleg" title="Egyenleg"><span class="ni">1</span><i class="fa fa-credit-card"></i> Egyenleg</a></li>
       				<li class="<?=($this->gets[0] == 'popup')?'on':''?>"><a href="/popup" title="Popup"><span class="ni">8</span><i class="fa fa-bullhorn"></i> Popup</a></li>
       				<li class="<?=($this->gets[0] == 'beallitasok')?'on':''?>"><a href="/beallitasok" title="Beállítások"><span class="ni">8</span><i class="fa fa-gear"></i> Beállítások</a></li>
         	</ul>

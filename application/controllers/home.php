@@ -8,7 +8,7 @@ class home extends Controller{
 
       if(Post::on('login')){
           try{
-              $this->AdminUser->login($_POST);
+              $this->User->login($_POST);
               Helper::reload($_GET['return']);
           }catch(Exception $e){
               $this->view->err    = true;
@@ -16,13 +16,9 @@ class home extends Controller{
           }
       }
 
-			$this->view->adm = $this->AdminUser;
-			$this->view->adm->logged = $this->AdminUser->isLogged();
-
 			if($this->gets[1] == 'exit'){
-				$this->AdminUser->logout();
+				$this->User->logout();
 			}
-
 
 			// SEO Információk
 			$SEO = null;

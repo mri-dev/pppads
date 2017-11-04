@@ -1,13 +1,13 @@
 $(function(){
 	$('.con i.hbtn').click(function(){
 		var key = $(this).attr('key');
-		
+
 		$('.'+key).slideToggle(200);
-	});	
+	});
 
 	getNotifications();
 	startReceiveNotification( 10000 );
-	
+
 	tinymce.init({
 	    selector: "textarea:not(.no-editor)",
 	    editor_deselector : 'no-editor',
@@ -15,7 +15,7 @@ $(function(){
 	    language: "hu_HU",
 	    content_css : "/public/v1.0/styles/DinFonts.css",
 	    allow_styles: 'family-font',
-	    font_formats : 
+	    font_formats :
 	   			"Din Composit=Din Comp, sans-serif;"+
 	   			"Din Condensed=Din Cond, sans-serif;"+
 	    		"Andale Mono=andale mono,times;"+
@@ -43,7 +43,7 @@ $(function(){
 	   toolbar1: "undo redo | bold italic underline | fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
 	   toolbar2: "| responsivefilemanager | link unlink anchor | image media |  print preview code ",
 	   image_advtab: true ,
-	   theme_advanced_resizing : true,	   
+	   theme_advanced_resizing : true,
 	   external_filemanager_path:"/filemanager/",
 	   filemanager_title:"Responsive Filemanager" ,
 	   external_plugins: { "filemanager" : "/filemanager/plugin.min.js"}
@@ -85,13 +85,14 @@ function loadTemplate ( key, arg, callback) {
 }
 
 // Admin live értesítő
-function getNotifications(){ 
+function getNotifications(){
 	$.post("/ajax/get", {
 		type : 'getNotification'
 	}, function(d){
 		var a = $.parseJSON(d);
 
 		// Üzenetek
+		/*
 		var msg_nf 		= $('.slideMenu .menu li a[title=Üzenetek]');
 		var msg_nf_e 	= msg_nf.find('.ni');
 
@@ -110,67 +111,7 @@ function getNotifications(){
 				visibility : 'visible'
 			});
 		}
+		*/
 
-		// Megrendelés
-		var order_nf 		= $('.slideMenu .menu li a[title=Megrendelések]');
-		var order_nf_e 		= order_nf.find('.ni');
-
-		if( a.data.new_order == 0 ){
-			order_nf_e
-				.text( 0 )
-				.attr( 'title', '' );
-			order_nf_e.css({
-				visibility : 'hidden'
-			});
-		}else{
-			order_nf_e
-				.text( a.data.new_order )
-				.attr( 'title', a.data.new_order+ ' db új megrendelés' );
-			order_nf_e.css({
-				visibility : 'visible'
-			});
-		}
-
-		// Casada Shop
-		var order_nf 		= $('.slideMenu .menu li a[title=Üzletek]');
-		var order_nf_e 		= order_nf.find('.ni');
-
-		if( a.data.inactive_casadapont == 0 ){
-			order_nf_e
-				.text( 0 )
-				.attr( 'title', '' );
-			order_nf_e.css({
-				visibility : 'hidden'
-			});
-		}else{
-			order_nf_e
-				.text( a.data.inactive_casadapont )
-				.attr( 'title', a.data.inactive_casadapont+ ' db inaktív / feldolgozatlan igény' );
-			order_nf_e.css({
-				visibility : 'visible'
-			});
-		}
-
-		// Arena Water Card
-		var awc_nf 		= $(".slideMenu .menu li a[title='Arena Water Card']");
-		var awc_nf_e 	= awc_nf.find('.ni');
-
-		if( a.data.new_awc == 0 ){
-			awc_nf_e
-				.text( 0 )
-				.attr( 'title', '' );
-			awc_nf_e.css({
-				visibility : 'hidden'
-			});
-		}else{
-			console.log(awc_nf_e);
-			awc_nf_e
-				.text( a.data.new_awc )
-				.attr( 'title', a.data.new_awc+ ' db aktiválásra váró kártya' );
-			awc_nf_e.css({
-				visibility : 'visible'
-			});
-		}
-		
 	}, "html");
 }
