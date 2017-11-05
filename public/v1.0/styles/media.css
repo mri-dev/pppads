@@ -67,6 +67,15 @@ a.btn {
 a.btn-default {
 	color: black;
 }
+a.btn-primary{
+  background: #f27346;
+  border-color: #e8a58e;
+  border-radius: 5px;
+}
+a.btn-primary:hover{
+  background: #ff5d23;
+  border-color: #e8a58e;
+}
 html{
 	height: 100%;
 	padding:0;
@@ -111,7 +120,7 @@ button:hover{
 	background:#24659a;
 }
 #top{
-	background-color: #24659a;
+	background-color: #2f4d91;
 	color:#fff;
 	line-height:50px;
 	padding:0;
@@ -131,7 +140,7 @@ body.blured-bg #top {
 	background-color: #24659a;
 }
 #top .shower{
-	background:#25557d;
+	background:#284380;
 	float:right;
 	position:relative;
 	padding:0 10px;
@@ -187,7 +196,7 @@ body.blured-bg #top {
 .shower.fb-vote a
 { color: white; font-size:12px; }
 .dmenu{
-	background:#25557d;
+	background:#284380;
 	position:absolute;
 	display:none;
 	top: 49px;
@@ -264,7 +273,7 @@ body.blured-bg #content .container-fluid{
 	z-index:10;
 }
 #content .slideMenu{
-	background:#292929;
+	background:#1b272b;
 	width:200px;
 	min-height:100%;
   padding: 52px 0 0 0;
@@ -283,12 +292,12 @@ body.blured-bg #content .container-fluid{
 	margin:0 15px;
 }
 #content .slideMenu .menu ul li{
-	border-bottom: 1px solid  #353535;
+	border-bottom: 1px solid  #243136;
 }
 
 #content .slideMenu .menu ul li a{
 	position:relative;
-	color:#A7A7A7;
+	color:#98a3a7;
 	text-align:right;
 	display:block;
 	font-size:18px;
@@ -346,7 +355,7 @@ body.blured-bg #content .container-fluid{
 	position:absolute;
 }
 #content .slideMenu .menu ul li:hover a,#content .slideMenu .menu ul li.on a{
-	background: rgb(214, 90, 69);;
+	background: #f6a30a;
 	color:white;
 	text-decoration:none;
 }
@@ -362,17 +371,24 @@ body.blured-bg #content .container-fluid{
 	text-transform:uppercase;
 	-webkit-font-smoothing: antialiased;
 	letter-spacing:0px;
-	margin-bottom:15px;
+	margin-bottom: 35px;
 }
 #content .ct h1 span,
 #content .ct h1 small{
-	font-size:12px;
+	font-size: 0.45em;
 	font-family:'myriadpro', sans-serif;
 	letter-spacing:normal;
+  text-transform: none;
 	color:#acacac;
 }
 #content .ct h1 small{
 	color: black;
+}
+#content .ct h1 .subtitle{
+  font-size: 0.48em;
+  text-transform: none;
+  margin-top: 5px;
+  color: dimgrey;
 }
 
 #content .ct h1 span > strong {
@@ -3018,4 +3034,31 @@ fieldset.block {
 
 .popup-view .con .row div[class*=col-] {
 	padding: 0 15px;
+}
+.domains .domain {
+  font-size: 1.2em;
+}
+.domains .domain .title {
+  font-size: 1.4em;
+  line-height: 30px;
+  color: #f6a30a;
+  font-weight: bold;
+}
+.domains .domain .row > div[class*=col-md]{
+  height: 30px;
+}
+.domains .domain .status.active{
+  background: #15c635;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.domains .domain .status.inactive{
+  background: #f9593d;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.domains .con{
+  padding: 10px 5px;
+  border-radius: 10px;
+  border: 1px solid #eaeaea;
 }

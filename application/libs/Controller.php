@@ -5,7 +5,7 @@ use PortalManager\AdminUser;
 use PortalManager\Template;
 use PortalManager\Users;
 use PortalManager\Portal;
-
+use PopupManager\Domain;
 
 class Controller {
     public $db = null;
@@ -46,6 +46,10 @@ class Controller {
         $this->out( 'db',   $this->db );
         $this->out( 'user', $this->User->get( self::$user_opt ) );
         $this->out( 'u', $this->User );
+
+        $this->Domain = new Domain( array( 'db' => $this->db, 'settings' => $this->view->settings ) );
+        $this->MyDomains = $this->Domain->getList(array('userid' => $this->view->user['data']['ID']));
+        $this->out( 'mydomains', $this->MyDomains );
 
         $templates = new Template( VIEW . 'templates/' );
         $this->out( 'templates', $templates );
