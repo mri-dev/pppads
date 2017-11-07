@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.w3.org/1999/html4"
       xmlns:og="http://ogp.me/ns#"
-      xmlns:fb="http://www.facebook.com/2008/fbml" lang="hu-HU" ng-app="casada">
+      xmlns:fb="http://www.facebook.com/2008/fbml" lang="hu-HU" ng-app="pilot">
 <head>
 	<title><?=$this->title?></title>
     <?=$this->addMeta('robots','index,folow')?>
@@ -109,7 +109,20 @@
     	<div class="col-md-7 left">
     		<img height="34" class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
     		<div class="link">
-    			<strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
+          <div ng-controller="Domains">
+            <md-input-container class="domain-list" md-colors="indigo">
+              <label>Weboldal</label>
+              <md-select ng-model="ctrl.userState">
+                <md-option><em>None</em></md-option>
+                <md-option ng-repeat="domain in domains" ng-value="domain.ID">
+                  {{domain.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div ng-show="domainsnum == 0">
+              <strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
+            </div>
+          </div>
     		</div>
     	</div>
 
@@ -124,11 +137,11 @@
               	</ul>
               </div>
           </div>
-        	<div class="shower no-bg">
+        	<div class="shower no-bg" style="display: none;">
         		<a href="<?=FILE_BROWSER_IMAGE?>" data-fancybox-type="iframe" class="iframe-btn">Galéria <i class="fa fa-picture-o"></i></a>
           </div>
           <div class="shower no-bg">
-            <a href="/mystatus">Fiók státusz: <span class="user-status <?=$this->user['data']['user_group']?>"><?php echo $this->u->getUserGroupe(); ?></span></a>
+            <a href="/csomagok">Csomagom: <span class="user-status <?=($this->u->MyPackage()->isDemo()?'demo':'user')?>"><?php echo $this->u->MyPackage()->getName(); ?></span></a>
           </div>
           <div class="shower no-bg cash">
             <a href="/egyenleg">Egyenleg: <strong><?=number_format($this->u->getEgyenleg(), 0,""," ")."<span class='smd'><sup>.".end(explode(".",number_format($this->u->getEgyenleg(), 2, ".","")))?></sup></span> FT</strong></a>

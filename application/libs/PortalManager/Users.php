@@ -7,6 +7,7 @@ use PortalManager\Template;
 use PortalManager\Portal;
 use PortalManager\CasadaShop;
 use PortalManager\Request;
+use PopupManager\Packages;
 
 /**
  * class Users
@@ -35,7 +36,7 @@ class Users
 	public 	$days 		= array('hetfo','kedd','szerda', 'csutortok','pentek','szombat','vasarnap');
 	public 	$day_names	= array('hetfo' => 'Hétfő','kedd' => 'Kedd','szerda' => 'Szerda', 'csutortok' => 'Csütörtök','pentek' => 'Péntek','szombat' =>'Szombat','vasarnap' => 'Vasárnap');
 
-	function __construct( $arg = array() ){
+	function __construct( $arg = array() ) {
 		$this->db 		= $arg['db'];
 		$this->is_cp 	= $arg['admin'];
 		$this->settings = $arg[view]->settings;
@@ -47,6 +48,23 @@ class Users
 
 		$this->Portal 	= new Portal( $arg );
 		$this->getUser();
+	}
+
+	public function MyPackage()
+	{
+		$packages = new Packages(array(
+			'db' => $this->db,
+			'settings' => $this->settings
+		));
+		$packages->getList(array(
+			'id' => $this->getMyPackageID()
+		));
+		return $packages;
+	}
+
+	public function getMyPackageID()
+	{
+		return (int)$this->user_data[data][package];
 	}
 
 	public function getUserGroupes()

@@ -13,15 +13,24 @@
 <?=$this->addStyle('angularjs-color-picker.min', 'media="screen"', false)?>
 <link rel="stylesheet" type="text/css" href="<?=JS?>fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
 <link rel="stylesheet" type="text/css" href="<?=JS?>fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css" />
+
 
 <!-- JS's -->
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 <?=$this->addJS('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',true)?>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <?=$this->addJS('bootstrap.min',false)?>
 <?=$this->addJS('jquery.wysiwyg',false)?>
 <?=$this->addJS('master',false,false)?>
-<?=$this->addJS('angular.min',false)?>
 <?=$this->addJS('app',false,false)?>
+
+  <!-- Angular Material Library -->
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
 <script type="text/javascript" src="<?=JS?>tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="<?=JS?>fancybox/jquery.fancybox.js?v=2.1.4"></script>
 <script type="text/javascript" src="<?=JS?>fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>

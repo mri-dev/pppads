@@ -221,6 +221,15 @@ body.blured-bg #top {
 	background:#3e7db1;
 	text-decoration:none;
 }
+#top .domain-list{
+  color: white;
+  margin: 0 !important;
+}
+#top .domain-list label,
+#top .domain-list md-select .md-select-value.md-select-placeholder,
+#top .domain-list md-select.md-default-theme .md-select-icon, md-select .md-select-icon{
+  color: white !important;
+}
 #login .links {
 	float:left;
 }
