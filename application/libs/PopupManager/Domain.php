@@ -46,6 +46,8 @@ class Domain
 
 		foreach ($list->fetchAll(\PDO::FETCH_ASSOC) as $d)
 		{
+			$d['ID'] = (int)$d['ID'];
+			$d['active'] = (boolean)$d['active'];
 			$this->loaded_list[] = $d;
 		}
 

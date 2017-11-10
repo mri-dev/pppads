@@ -109,16 +109,19 @@
     	<div class="col-md-7 left">
     		<img height="34" class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
     		<div class="link">
-          <div ng-controller="Domains">
-            <md-input-container class="domain-list" md-colors="indigo">
-              <label>Weboldal</label>
-              <md-select ng-model="ctrl.userState">
-                <md-option><em>None</em></md-option>
-                <md-option ng-repeat="domain in domains" ng-value="domain.ID">
-                  {{domain.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+          <div class="domain-list" ng-controller="Domains" ng-init="init()">
+            <div class="selected-domain">
+              <div class="current">
+                <label>Kiválasztott weboldalam:</label>
+                <strong>{{getDomain().domain}}</strong>
+              </div>
+            </div>
+            <div class="droplist">
+              <div class="item" ng-class="(domain.ID==current_domain)?'curr':''" ng-click="selectDomain(domain.ID)" data-id="{{domain.ID}}" ng-repeat="domain in domains">
+                <i ng-show="domain.active" class="fa fa-check-circle-o"></i><i ng-hide="domain.active" class="fa fa-times-circle-o"></i> {{domain.domain}}
+              </div>
+            </div>
+
             <div ng-show="domainsnum == 0">
               <strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
             </div>

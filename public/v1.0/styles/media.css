@@ -136,6 +136,9 @@ button:hover{
 	float: left;
 	margin: 8px 20px 8px 0;
 }
+#top .link {
+	float: left;
+}
 body.blured-bg #top {
 	background-color: #24659a;
 }
@@ -224,6 +227,107 @@ body.blured-bg #top {
 #top .domain-list{
   color: white;
   margin: 0 !important;
+  height: 50px;
+  position: relative;
+  width: 200px;
+}
+.alert-toast {
+  z-index: 99999999999;
+  top: 60px !important;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.alert-toast.mode-error  .md-toast-content{
+  background-color: rgba(227, 57, 57, 0.93);
+}
+.alert-toast.mode-success .md-toast-content{
+  background-color: rgba(111, 182, 65, 0.95);
+}
+.alert-toast.mode-progress .md-toast-content{
+  background-color: #f27346;
+}
+#top .domain-list{
+  position: relative;
+}
+#top .domain-list:after{
+  position: absolute;
+  font-family: 'FontAwesome';
+  right: 15px;
+  top: 50%;
+  content: "\f107";
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 20px;
+  color: #8190b4;
+}
+#top .domain-list .droplist{
+  position: absolute;
+  background: #1b272b;
+  top: 50px;
+  display: none;
+  box-shadow: 0 7px 25px -5px #6e6e6e;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+}
+#top .domain-list:hover .droplist{
+  display: block;
+}
+#top .domain-list .selected-domain{
+  padding: 0 15px;
+}
+#top .domain-list:hover .selected-domain{
+  background: #243c74;
+}
+#top .domain-list .droplist .item{
+  line-height: 40px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+#top .domain-list .droplist .item i{
+  font-size: 14px;
+  font-weight: 300;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+#top .domain-list .droplist .item i[class*=fa-times]{
+  color: #e38787;
+}
+#top .domain-list .droplist .item i[class*=fa-check]{
+  color: #7ad77a;
+}
+#top .domain-list .droplist .item:hover i{
+  color: #ffffff;
+}
+#top .domain-list .droplist .item.curr{
+  background: #707070;
+}
+#top .domain-list .droplist .item:not(.curr):hover{
+  background: #f27346;
+}
+#top .domain-list .selected-domain{
+  line-height: 1;
+}
+#top .domain-list .selected-domain label{
+  font-size: 0.7em;
+  font-weight: 300;
+  display: block;
+}
+#top .domain-list .selected-domain strong{
+  font-size: 1.2em;
+}
+#top .domain-list .selected-domain{
+  position: relative;
+  height: 100%;
+}
+#top .domain-list .selected-domain > .current{
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 #top .domain-list label,
 #top .domain-list md-select .md-select-value.md-select-placeholder,

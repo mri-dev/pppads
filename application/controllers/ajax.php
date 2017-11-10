@@ -519,7 +519,7 @@ class ajax extends Controller{
 						'error' => 0,
 						'data' 	=> array()
 					);
-				
+
 					echo json_encode( $re );
 				break;
 				case 'loadTrafficAdder':

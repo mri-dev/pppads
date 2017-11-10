@@ -1,20 +1,86 @@
 var popup = angular.module('pilot', ['color.picker','ui.tinymce', 'ngSanitize', 'ngMaterial']);
 
-popup.controller("Domains", ['$scope', '$http', function($scope, $http){
+popup.controller("Domains", ['$scope', '$http', '$mdToast', '$window', function($scope, $http, $mdToast, $window){
 	$scope.domains = [];
 	$scope.domainsnum = 2;
+	$scope.current_domain = -1;
 
-	$scope.domains.push({
-		'name': 'www.mri-dev.com',
-		'ID': 1
-	});
-	$scope.domains.push({
-		'name': 'www.casada.com',
-		'ID': 2
-	});
+	$scope.init = function(){
+		$scope.loadDomains();
+	}
 
 	$scope.loadDomains = function(){
+		$http({
+			method: 'POST',
+			url: '/api/Pilot',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: $.param({
+				type: "loadDomains"
+			})
+		}).success(function(r){
+			console.log(r);
 
+			if (r.error == 1) {
+				$scope.toast(r.msg, 'error');
+			} else {
+				$scope.current_domain = r.data.current_domain;
+				angular.forEach(r.data.domains, function(e,i){
+					$scope.domains.push(e);
+				});
+			}
+		});
+	}
+
+	$scope.toast = function( text, mode ){
+		mode = (typeof mode === 'undefined') ? 'simple' : mode;
+		if (typeof text !== 'undefined') {
+			$mdToast.show(
+				$mdToast.simple()
+				.textContent(text)
+				.position('top')
+				.toastClass('alert-toast mode-'+mode)
+				.hideDelay(5000)
+			);
+		}
+	}
+
+	$scope.getDomain = function(id){
+		var domain;
+		var getid = (typeof id === 'undefined') ? $scope.current_domain : id;
+		angular.forEach($scope.domains, function(e,i){
+			if (e.ID == getid) {
+				domain = e;
+				return;
+			}
+		});
+
+		return domain;
+	}
+
+	$scope.selectDomain = function(id){
+		if (id != $scope.current_domain && $scope.getDomain(id).active )
+		{
+			$scope.current_domain = id;
+			$scope.toast('Átváltás a következő domainre: '+ $scope.getDomain(id).domain , 'progress');
+
+			$http({
+				method: 'POST',
+				url: '/api/Pilot',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				data: $.param({
+					type: "setCurrentDomain",
+					domain: id
+				})
+			}).success(function(r){
+				console.log(r);
+
+				if (r.error == 1) {
+					$scope.toast(r.msg, 'error');
+				} else {
+					//$window.location.reload();
+				}
+			});
+		}
 	}
 }]);
 
