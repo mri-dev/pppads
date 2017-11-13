@@ -1,11 +1,18 @@
 AddDefaultCharset UTF-8
 Options -Indexes
 RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^scripts.js$ index.php?tag=scripts [NC,QSA,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^(.+)$ index.php?tag=$1 [QSA,L]
+
 
 <ifModule mod_headers.c>
 Header set Connection keep-alive
