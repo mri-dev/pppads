@@ -100,7 +100,7 @@
 		}
     </script>
 </head>
-<body class="<? if(!$this->user): ?>blured-bg<? endif; ?>">
+<body class="<?=$this->bodyclass?> <? if(!$this->user): ?>blured-bg<? endif; ?>">
 <div id="top" class="container-fluid">
 	<div class="row">
 		<? if(!$this->user): ?>
@@ -193,6 +193,7 @@
               <li class="<?=($this->gets[0] == 'install')?'on':''?>"><a href="/install" title="Telepítés"><span class="ni">1</span><i class="fa fa-code"></i> Telepítés</a></li>
               <li class="<?=($this->gets[0] == 'egyenleg')?'on':''?>"><a href="/egyenleg" title="Egyenleg"><span class="ni">1</span><i class="fa fa-credit-card"></i> Egyenleg</a></li>
       				<li class="<?=($this->gets[0] == 'popup')?'on':''?>"><a href="/popup" title="Popup"><span class="ni">8</span><i class="fa fa-bullhorn"></i> Popup</a></li>
+              <li class="<?=($this->gets[0] == 'csomagok')?'on':''?>"><a href="/csomagok" title="Csomagok"><span class="ni">8</span><i class="fa fa-cubes"></i> Csomagok</a></li>
       				<li class="<?=($this->gets[0] == 'beallitasok')?'on':''?>"><a href="/beallitasok" title="Beállítások"><span class="ni">8</span><i class="fa fa-gear"></i> Beállítások</a></li>
         	</ul>
         </div>

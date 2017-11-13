@@ -84,6 +84,57 @@ popup.controller("Domains", ['$scope', '$http', '$mdToast', '$window', function(
 	}
 }]);
 
+popup.controller("Packages", ['$scope', '$http', '$mdToast', '$window', function($scope, $http, $mdToast, $window){
+	$scope.packages = [];
+	$scope.packagesnum = 0;
+	$scope.current_package = false;
+	$scope.loaded = false;
+
+	$scope.init = function(){
+		$scope.loadPackages();
+	}
+
+	$scope.loadPackages = function(){
+		$scope.loaded = false;
+		$http({
+			method: 'POST',
+			url: '/api/Pilot',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: $.param({
+				type: "loadPackages"
+			})
+		}).success(function(r){
+			console.log(r);
+
+			if (r.error == 1) {
+				$scope.toast(r.msg, 'error');
+			} else {
+				$scope.loaded = true;
+				if (!$scope.current_package) {
+					$scope.current_package = {};
+				}
+				$scope.current_package = r.data.current_package;
+				angular.forEach(r.data.packages, function(e,i){
+					$scope.packages.push(e);
+				});
+			}
+		});
+	}
+
+	$scope.toast = function( text, mode ){
+		mode = (typeof mode === 'undefined') ? 'simple' : mode;
+		if (typeof text !== 'undefined') {
+			$mdToast.show(
+				$mdToast.simple()
+				.textContent(text)
+				.position('top')
+				.toastClass('alert-toast mode-'+mode)
+				.hideDelay(5000)
+			);
+		}
+	}
+}]);
+
 popup.controller("popup", ['$scope', '$sce', '$http', function($scope, $sce, $http)
 {
 	var ctrl = this;

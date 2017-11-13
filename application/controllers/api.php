@@ -1,4 +1,7 @@
 <?
+
+use PopupManager\Packages;
+
 class api extends Controller{
 
 		function __construct(){
@@ -35,6 +38,9 @@ class api extends Controller{
 
       switch ($type)
       {
+				/**
+				* DOMAINS & WEBSITES
+				**/
         case 'getCurrentDomain':
 
         break;
@@ -45,6 +51,46 @@ class api extends Controller{
           $data['current_domain'] = $current_domain_id;
           $data['domains'] = $this->MyDomains;
         break;
+
+				/**
+				* PACKAGES
+				**/
+				case 'loadPackages':
+					$this->initPackagesClass();
+					$this->Packages->getList();
+
+					$packages = array();
+					while ($this->Packages->walk())
+					{
+						$p = $this->Packages;
+						$packages[] = array(
+							'ID' => $p->getID(),
+							'name' => $p->getName(),
+							'isdemo' => $p->isDemo(),
+							'domains' => $p->avaiableDomains(),
+							'freeviews' => $p->packageViews(true),
+							'viewprice' => $p->viewPrice(),
+							'price' => $p->price(true)
+						);
+					}
+					unset($p);
+
+					$data['packages'] = $packages;
+					$current_package =  $this->Packages->getList(array('id' => (int)$this->view->user['data']['package']));
+
+					$data['current_package'] = array(
+						'ID' => $current_package->getID(),
+						'name' => $current_package->getName(),
+						'isdemo' => $current_package->isDemo(),
+						'domains' => $current_package->avaiableDomains(),
+						'freeviews' => $current_package->packageViews(),
+						'viewprice' => $current_package->viewPrice(),
+						'price' => $current_package->price(),
+						'demo_expire_at' => $this->view->user['data']['demo_expired']
+					);
+
+					unset($packages);
+				break;
 
         default:
           $re['error'] = 1;
@@ -57,6 +103,17 @@ class api extends Controller{
       header('Content-Type: application/json');
       echo json_encode($re);
     }
+
+		/*************************************
+		**************************************/
+
+		private function initPackagesClass()
+		{
+			$this->Packages = new Packages(array(
+				'db' => $this->db,
+				'settings' => $this->settings
+			));
+		}
 
 		function __destruct(){}
 	}
