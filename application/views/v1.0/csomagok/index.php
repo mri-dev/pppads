@@ -6,6 +6,9 @@
       <div class="p-wrapper">
         <div class="name">
           {{package.name}}
+          <div class="subtitle" ng-show="package.isdemo">
+            14 napig ingyen tesztelheti!
+          </div>
         </div>
         <div class="domain">
           <div class="label">
@@ -47,7 +50,7 @@
           {{package.price}} <span class="it">Ft</span>
         </div>
         <div class="order">
-          <button ng-show="current_package && current_package.ID!=package.ID">Aktiválás</button>
+          <button ng-click="changePackage(package.ID, $event)" ng-show="current_package && current_package.ID!=package.ID">Aktiválás</button>
           <div ng-show="current_package && current_package.ID==package.ID" class="already-active">
             <i class="fa fa-check-circle-o"></i> Aktív csomag.
           </div>

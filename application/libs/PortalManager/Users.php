@@ -50,6 +50,13 @@ class Users
 		$this->getUser();
 	}
 
+	public function viewsLeft()
+	{
+		$views = -1;
+
+		return $views;
+	}
+
 	public function MyPackage()
 	{
 		$packages = new Packages(array(
@@ -692,6 +699,9 @@ class Users
 
 		extract($this->db->q($q));
 
+		$data['cash'] = (float)$data['cash'];
+		$data['cash_net'] = (float)$data['cash']/1.27;
+
 		// Felhasználó adatok
 		$detailslist = array();
 
@@ -703,13 +713,21 @@ class Users
 
 		if ( $details->rowCount() != 0 ) {
 			foreach ($details->fetchAll(\PDO::FETCH_ASSOC) as $det) {
-				$detailslist[$det['nev']] = $det['ertek'];
+				$detailslist[$det['nev']] = $this->autoFixValue( $det['ertek'] );
 			}
 		}
 
 		$data = array_merge($data, $detailslist);
 
 		return $data;
+	}
+
+	private function autoFixValue( $value='' )
+	{
+		if (is_numeric($value)) {
+			$value = (float)$value;
+		}
+		return $value;
 	}
 
 	public function logout()

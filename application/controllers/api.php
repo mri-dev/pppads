@@ -70,7 +70,8 @@ class api extends Controller{
 							'domains' => $p->avaiableDomains(),
 							'freeviews' => $p->packageViews(true),
 							'viewprice' => $p->viewPrice(),
-							'price' => $p->price(true)
+							'price' => $p->price(true),
+							'raw_price' => $p->price()
 						);
 					}
 					unset($p);
@@ -88,6 +89,7 @@ class api extends Controller{
 						'price' => $current_package->price(),
 						'demo_expire_at' => $this->view->user['data']['demo_expired']
 					);
+					$data['user'] = $this->view->user;
 
 					unset($packages);
 				break;
@@ -103,6 +105,19 @@ class api extends Controller{
       header('Content-Type: application/json');
       echo json_encode($re);
     }
+
+		public function template()
+		{
+			$key = $this->gets[2];
+
+			switch ($key)
+			{
+				case 'confirm_package_order':
+					$this->view->render('templates/api/'.$key);
+				break;
+			}
+
+		}
 
 		/*************************************
 		**************************************/

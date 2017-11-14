@@ -84,11 +84,12 @@ popup.controller("Domains", ['$scope', '$http', '$mdToast', '$window', function(
 	}
 }]);
 
-popup.controller("Packages", ['$scope', '$http', '$mdToast', '$window', function($scope, $http, $mdToast, $window){
+popup.controller("Packages", ['$scope', '$http', '$mdToast', '$window', '$mdDialog', function($scope, $http, $mdToast, $window, $mdDialog){
 	$scope.packages = [];
 	$scope.packagesnum = 0;
 	$scope.current_package = false;
 	$scope.loaded = false;
+	$scope.user = {};
 
 	$scope.init = function(){
 		$scope.loadPackages();
@@ -113,12 +114,58 @@ popup.controller("Packages", ['$scope', '$http', '$mdToast', '$window', function
 				if (!$scope.current_package) {
 					$scope.current_package = {};
 				}
+				if (r.data.user) {
+					$scope.user = r.data.user;
+				}
 				$scope.current_package = r.data.current_package;
 				angular.forEach(r.data.packages, function(e,i){
 					$scope.packages.push(e);
 				});
 			}
 		});
+	}
+
+	$scope.findPackage = function( id ) {
+		var pack;
+
+		angular.forEach($scope.packages, function(e,i){
+			if (e.ID == id) {
+				pack = e;
+			}
+		});
+
+		return pack;
+	}
+
+	$scope.changePackage = function(id, ev){
+		var csomag = $scope.findPackage(id);
+		var confirm = $mdDialog.confirm({
+			controller: ConfirmPackageOrder,
+			templateUrl: '/api/template/confirm_package_order',
+			parent: angular.element(document.body),
+			locals: {
+				csomag: csomag,
+				me: $scope.user
+			}
+		});
+
+		function ConfirmPackageOrder( $scope, $mdDialog, csomag, me) {
+			$scope.csomag = csomag;
+			$scope.me = me;
+			$scope.closeDialog = function(){
+				$mdDialog.hide();
+			}
+			$scope.topup = function(){
+				$window.location.href = '/egyenleg';
+			}
+		}
+
+		$mdDialog.show(confirm)
+		.then(function() {
+      $scope.status = 'You decided to get rid of your debt.';
+    }, function() {
+      $scope.status = 'You decided to keep your debt.';
+    });
 	}
 
 	$scope.toast = function( text, mode ){

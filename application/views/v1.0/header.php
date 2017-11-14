@@ -106,7 +106,7 @@
 		<? if(!$this->user): ?>
 		<div class="col-md-12 center"><img height="34" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>"></div>
 		<? else: ?>
-    	<div class="col-md-7 left">
+    	<div class="col-md-5 left">
     		<img height="34" class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
     		<div class="link">
           <div class="domain-list" ng-controller="Domains" ng-init="init()">
@@ -121,7 +121,6 @@
                 <i ng-show="domain.active" class="fa fa-check-circle-o"></i><i ng-hide="domain.active" class="fa fa-times-circle-o"></i> {{domain.domain}}
               </div>
             </div>
-
             <div ng-show="domainsnum == 0">
               <strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
             </div>
@@ -129,7 +128,7 @@
     		</div>
     	</div>
 
-        <div class="col-md-5" align="right">
+        <div class="col-md-7 right">
         	<div class="shower">
           	<i class="fa fa-user"></i>
           	<?=$this->user['data']['nev']?>
@@ -146,6 +145,12 @@
           <div class="shower no-bg">
             <a href="/csomagok">Csomagom: <span class="user-status <?=($this->u->MyPackage()->isDemo()?'demo':'user')?>"><?php echo $this->u->MyPackage()->getName(); ?></span></a>
           </div>
+          <div class="shower divider">|</div>
+          <?php if ($leftviews = $this->u->viewsLeft() != -1): ?>
+          <div class="shower no-bg cash">
+            <a href="/egyenleg"><i class="fa fa-eye"></i> <strong><?=number_format($this->u->viewsLeft(), 0,""," ")?></strong></a>
+          </div>
+          <?php endif; ?>
           <div class="shower no-bg cash">
             <a href="/egyenleg">Egyenleg: <strong><?=number_format($this->u->getEgyenleg(), 0,""," ")."<span class='smd'><sup>.".end(explode(".",number_format($this->u->getEgyenleg(), 2, ".","")))?></sup></span> FT</strong></a>
           </div>
