@@ -43,6 +43,7 @@
 				slideMenu.css({
 					'left' : '0px'
 				});
+        slideMenu.removeClass('closed');
 				$('.ct').css({
 					'paddingLeft' : '220px'
 				});
@@ -50,6 +51,7 @@
 				slideMenu.css({
 					'left' : '-'+closeNum+'px'
 				});
+        slideMenu.addClass('closed');
 				$('.ct').css({
 					'paddingLeft' : '75px'
 				});
@@ -62,15 +64,18 @@
 						'left' : '-'+closeNum+'px'
 
 					},200);
+          slideMenu.addClass('closed');
 					$('.ct').animate({
 						'paddingLeft' : '75px'
 					},200);
 					saveState('closed');
 				}else{
+
 					isSlideOut = true;
 					slideMenu.animate({
 						'left' : '0px'
 					},200);
+          slideMenu.removeClass('closed');
 					$('.ct').animate({
 						'paddingLeft' : '220px'
 					},200);
@@ -102,37 +107,39 @@
 </head>
 <body class="<?=$this->bodyclass?> <? if(!$this->user): ?>blured-bg<? endif; ?>">
 <div id="top" class="container-fluid">
-	<div class="row">
-		<? if(!$this->user): ?>
-		<div class="col-md-12 center"><img height="34" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>"></div>
-		<? else: ?>
-    	<div class="col-md-5 left">
-    		<img height="34" class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
-    		<div class="link">
-          <div class="domain-list" ng-controller="Domains" ng-init="init()">
-            <div class="selected-domain">
-              <div class="current">
-                <label>Kiválasztott weboldalam:</label>
-                <strong>{{getDomain().domain}}</strong>
+  <div class="logo">
+    <img class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
+  </div>
+  <div class="topnavbar">
+    <div class="mainbar">
+  		<? if(!$this->user): ?>
+  		<div class="col-md-12 center"><img height="34" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>"></div>
+  		<? else: ?>
+      	<div class="left">
+      		<div class="link">
+            <div class="domain-list" ng-controller="Domains" ng-init="init()">
+              <div class="selected-domain">
+                <div class="current">
+                  <label>Kiválasztott weboldalam:</label>
+                  <strong>{{getDomain().domain}}</strong>
+                </div>
+              </div>
+              <div class="droplist">
+                <div class="item" ng-class="(domain.ID==current_domain)?'curr':''" ng-click="selectDomain(domain.ID)" data-id="{{domain.ID}}" ng-repeat="domain in domains">
+                  <i ng-show="domain.active" class="fa fa-check-circle-o"></i><i ng-hide="domain.active" class="fa fa-times-circle-o"></i> {{domain.domain}}
+                </div>
+              </div>
+              <div ng-show="domainsnum == 0">
+                <strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
               </div>
             </div>
-            <div class="droplist">
-              <div class="item" ng-class="(domain.ID==current_domain)?'curr':''" ng-click="selectDomain(domain.ID)" data-id="{{domain.ID}}" ng-repeat="domain in domains">
-                <i ng-show="domain.active" class="fa fa-check-circle-o"></i><i ng-hide="domain.active" class="fa fa-times-circle-o"></i> {{domain.domain}}
-              </div>
-            </div>
-            <div ng-show="domainsnum == 0">
-              <strong><i class="fa fa-globe"></i> Nincs weboldal regisztrálva!</strong> <a href="/websites">Új weboldal regisztrálása</a>
-            </div>
-          </div>
-    		</div>
-    	</div>
-
-        <div class="col-md-7 right">
-        	<div class="shower">
-          	<i class="fa fa-user"></i>
+      		</div>
+      	</div>
+        <div class="right">
+        	<div class="shower userblock">
+          	<i class="fa fa-user-circle-o"></i>
           	<?=$this->user['data']['nev']?>
-              <i class="fa fa-caret-down"></i>
+              <i class="fa fa-angle-down"></i>
               <div class="dmenu">
               	<ul>
               		<li><a href="/home/exit">Kijelentkezés</a></li>
@@ -143,9 +150,9 @@
         		<a href="<?=FILE_BROWSER_IMAGE?>" data-fancybox-type="iframe" class="iframe-btn">Galéria <i class="fa fa-picture-o"></i></a>
           </div>
           <div class="shower no-bg">
-            <a href="/csomagok">Csomagom: <span class="user-status <?=($this->u->MyPackage()->isDemo()?'demo':'user')?>"><?php echo $this->u->MyPackage()->getName(); ?></span></a>
+            <a href="/csomagok">Az Ön jelenlegi csomagja: <span class="user-status <?=($this->u->MyPackage()->isDemo()?'demo':'user')?>"><?php echo $this->u->MyPackage()->getName(); ?></span></a>
           </div>
-          <div class="shower divider">|</div>
+          <div class="shower sep">|</div>
           <?php if ($leftviews = $this->u->viewsLeft() != -1): ?>
           <div class="shower no-bg cash">
             <a href="/egyenleg"><i class="fa fa-eye"></i> <strong><?=number_format($this->u->viewsLeft(), 0,""," ")?></strong></a>
@@ -156,7 +163,23 @@
           </div>
         </div>
         <? endif; ?>
-    </div>
+      </div>
+      <div class="subbar">
+        <div class="">
+          <i class="fa fa-clock-o"></i> Utolsó befizetés dátuma: <strong>nov. 13.</strong>, összege: <strong>60 000,00</strong> Ft.
+        </div>
+        <div class="">
+          <i class="fa fa-calendar"></i> István, az Ön által választott csomag még <strong class="red-text">15</strong> napig érvényes!
+        </div>
+        <div class="">
+          <a href="/egyenleg">Hosszabbítás</a>
+        </div>
+        <div class="">
+          <a href="/helpdesk"><i class="fa fa-mortar-board"></i> Segítség</a>
+        </div>
+      </div>
+  </div>
+
 </div>
 <!-- Login module -->
 <? if(!$this->user): ?>
@@ -193,7 +216,7 @@
         <div class="clr"></div>
    		<div class="menu">
         	<ul>
-            	<li class="<?=($this->gets[0] == 'home')?'on':''?>"><a href="/" title="Dashboard"><span class="ni">1</span><i class="fa fa-life-saver"></i> Dashboard</a></li>
+            	<li class="<?=($this->gets[0] == 'home')?'on':''?>"><a href="/" title="Dashboard"><span class="ni">1</span><i class="fa fa-life-saver"></i><span class="txt">Dashboard</span></a></li>
               <li class="<?=($this->gets[0] == 'websites')?'on':''?>"><a href="/websites" title="Weboldalaim"><span class="ni">1</span><i class="fa fa-globe"></i> Weboldalaim</a></li>
               <li class="<?=($this->gets[0] == 'install')?'on':''?>"><a href="/install" title="Telepítés"><span class="ni">1</span><i class="fa fa-code"></i> Telepítés</a></li>
               <li class="<?=($this->gets[0] == 'egyenleg')?'on':''?>"><a href="/egyenleg" title="Egyenleg"><span class="ni">1</span><i class="fa fa-credit-card"></i> Egyenleg</a></li>
