@@ -106,15 +106,13 @@
     </script>
 </head>
 <body class="<?=$this->bodyclass?> <? if(!$this->user): ?>blured-bg<? endif; ?>">
+<? if($this->user): ?>
 <div id="top" class="container-fluid">
   <div class="logo">
     <img class="top-logo" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>">
   </div>
   <div class="topnavbar">
     <div class="mainbar">
-  		<? if(!$this->user): ?>
-  		<div class="col-md-12 center"><img height="34" src="<?=IMG?>logo_white.svg" alt="<?=TITLE?>"></div>
-  		<? else: ?>
       	<div class="left">
       		<div class="link">
             <div class="domain-list" ng-controller="Domains" ng-init="init()">
@@ -162,7 +160,6 @@
             <a href="/egyenleg">Egyenleg: <strong><?=number_format($this->u->getEgyenleg(), 0,""," ")."<span class='smd'><sup>.".end(explode(".",number_format($this->u->getEgyenleg(), 2, ".","")))?></sup></span> FT</strong></a>
           </div>
         </div>
-        <? endif; ?>
       </div>
       <div class="subbar">
         <div class="">
@@ -172,15 +169,15 @@
           <i class="fa fa-calendar"></i> István, az Ön által választott csomag még <strong class="red-text">15</strong> napig érvényes!
         </div>
         <div class="">
-          <a href="/egyenleg">Hosszabbítás</a>
+          <a class="btn-red" href="/egyenleg">Egyenlegfeltöltés</a>
         </div>
         <div class="">
           <a href="/helpdesk"><i class="fa fa-mortar-board"></i> Segítség</a>
         </div>
       </div>
   </div>
-
 </div>
+<? endif; ?>
 <!-- Login module -->
 <? if(!$this->user): ?>
 <div id="login" class="container-fluid">
@@ -190,17 +187,16 @@
             <? if($this->err){ echo $this->bmsg; } ?>
             <form action="" method="post">
 	            <div class="input-group">
-	              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-				  <input type="text" class="form-control" name="email">
-				</div>
-                <br>
-                <div class="input-group">
-	              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				  <input type="password" class="form-control" name="pw">
-				</div>
-                <br>
-                <div class="left links"><a href="<?=HOMEDOMAIN?>"><i class="fa fa-angle-left"></i> www.<?=str_replace(array('https://','www.'), '', $this->settings['page_url'])?></a></div>
-                <div align="right"><button name="login">Bejelentkezés <i class="fa fa-arrow-circle-right"></i></button></div>
+      	              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+      				  <input type="text" class="form-control" name="email">
+      				</div>
+                      <br>
+                      <div class="input-group">
+      	              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+      				  <input type="password" class="form-control" name="pw">
+      				</div>
+              <br>
+              <div align="right"><button name="login">Bejelentkezés <i class="fa fa-arrow-circle-right"></i></button></div>
             </form>
 
 	    </div>

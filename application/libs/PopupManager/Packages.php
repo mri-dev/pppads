@@ -116,6 +116,31 @@ class Packages
 		}
 	}
 
+	public function getPromoText()
+	{
+		return ( is_null($this->item['promo_text']) ) ? false : $this->item['promo_text'];
+	}
+
+	public function getColorCode()
+	{
+		return $this->item['colorcode'];
+	}
+
+	public function getPromoTextColor()
+	{
+		return ( is_null($this->item['promo_text']) ) ? false : $this->item['promo_color'];
+	}
+
+	public function hasSubscribing()
+	{
+		return (boolean)$this->item['subscribing'];
+	}
+
+	public function hasSubscriberGrouping()
+	{
+		return (boolean)$this->item['subscriber_groups'];
+	}
+
 	public function getID()
 	{
 		return (int)$this->item['ID'];

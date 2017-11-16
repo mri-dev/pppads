@@ -71,7 +71,12 @@ class api extends Controller{
 							'freeviews' => $p->packageViews(true),
 							'viewprice' => $p->viewPrice(),
 							'price' => $p->price(true),
-							'raw_price' => $p->price()
+							'raw_price' => $p->price(),
+							'subs' => $p->hasSubscribing(),
+							'subsgroups' => $p->hasSubscriberGrouping(),
+							'promotext' => $p->getPromoText(),
+							'promotextcolor' => $p->getPromoTextColor(),
+							'colorcode' => $p->getColorCode()
 						);
 					}
 					unset($p);
