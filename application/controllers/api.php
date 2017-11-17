@@ -1,6 +1,6 @@
 <?
-
 use PopupManager\Packages;
+use PopupManager\Cash;
 
 class api extends Controller{
 
@@ -99,6 +99,37 @@ class api extends Controller{
 					unset($packages);
 				break;
 
+				/**
+				* EGYENLEG
+				**/
+				case 'topup':
+					$this->initCashClass();
+					list($data['hashkey'], $data['customid']) = $this->Cash->topup( (int)$this->view->user['data']['ID'], (int)$amount );
+        break;
+				case 'loadTransactions':
+					$this->initCashClass();
+					$this->Cash->getList(array(
+						'felh_id' => (int)$this->view->user['data']['ID']
+					));
+
+					while ($this->Cash->walk())
+					{
+						$p = $this->Cash;
+						$cash[] = array(
+							'ID' => $p->getID(),
+							'customid' => $p->getCustomID(),
+							'hashkey' => $p->getHashkey(),
+							'net_price' => $p->price(),
+							'br_price' => floor($p->price()*1.27),
+							'status' => $p->status(),
+							'datetime' => $p->getTransDate(),
+							'acceptdate' => $p->getAcceptDate(),
+						);
+					}
+					unset($p);
+					$data['transactions'] = $cash;
+				break;
+
         default:
           $re['error'] = 1;
           $re['msg'] = 'Hibás API hívás. Nincs ilyen funkció a listában: '.$type;
@@ -130,6 +161,14 @@ class api extends Controller{
 		private function initPackagesClass()
 		{
 			$this->Packages = new Packages(array(
+				'db' => $this->db,
+				'settings' => $this->settings
+			));
+		}
+
+		private function initCashClass()
+		{
+			$this->Cash = new Cash(array(
 				'db' => $this->db,
 				'settings' => $this->settings
 			));

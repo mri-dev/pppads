@@ -182,6 +182,112 @@ popup.controller("Packages", ['$scope', '$http', '$mdToast', '$window', '$mdDial
 	}
 }]);
 
+popup.controller("Egyenleg", ['$scope', '$http', '$mdToast', '$window', '$mdDialog', function($scope, $http, $mdToast, $window, $mdDialog){
+	$scope.selector = {
+		price: 0,
+		pricepaid: 0,
+		views: 0
+	};
+	$scope.accepted_terms = false;
+	$scope.viewprice = 2.2;
+	$scope.min_order_price = 1000;
+	$scope.orderprogress = false;
+	$scope.transload = false;
+	$scope.transactions = {};
+
+	$scope.init = function(){
+		$scope.loadTransList();
+	}
+
+	$scope.selectPrice = function(){
+		$scope.accepted_terms = false;
+		$scope.selector.views = Math.floor($scope.selector.price / $scope.viewprice);
+		$scope.selector.pricepaid = Math.floor($scope.selector.price * 1.27);
+	}
+	$scope.selectView = function(){
+		$scope.accepted_terms = false;
+		$scope.selector.price = Math.floor($scope.selector.views * $scope.viewprice);
+		$scope.selector.pricepaid = Math.floor($scope.selector.price * 1.27);
+		$scope.remodPriceRange();
+	}
+
+	$scope.remodPriceRange = function(){
+		if ($scope.selector.price < $scope.min_order_price ) {
+			$scope.selector.price = $scope.min_order_price;
+			$scope.selector.pricepaid = Math.floor($scope.selector.price * 1.27);
+			$scope.selector.views = Math.floor($scope.selector.price / $scope.viewprice);
+		}
+	}
+
+	$scope.orderCash = function(){
+		$scope.orderprogress = true
+		$scope.toast('Egyenleg megrendelése folyamatban.', 'progress', false);
+
+		$http({
+			method: 'POST',
+			url: '/api/Pilot',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: $.param({
+				type: "topup",
+				amount: $scope.selector.price
+			})
+		}).success(function(r){
+			console.log(r);
+			$scope.orderprogress = false;
+			$scope.selector = {
+				price: 0,
+				pricepaid: 0,
+				views: 0
+			};
+
+			if (r.error == 1) {
+				$scope.toast(r.msg, 'error', 10000);
+			} else {
+				$mdToast.hide();
+				$scope.toast('Egyenleg sikeresen megrendelve. Tranzakciók listájának frissítése.', 'success', 5000);
+				$scope.loadTransList();
+			}
+		});
+	}
+
+	$scope.loadTransList = function(){
+		$scope.transload = true;
+
+		$http({
+			method: 'POST',
+			url: '/api/Pilot',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: $.param({
+				type: "loadTransactions",
+				tipus: 'egyenleg'
+			})
+		}).success(function(r){
+			console.log(r);
+			$scope.transload = false;
+
+			if (r.error == 1) {
+				$scope.toast(r.msg, 'error', 10000);
+			} else {
+				$scope.transactions = r.data.transactions;
+			}
+		});
+	}
+
+	$scope.toast = function( text, mode, timeout ){
+		mode = (typeof mode === 'undefined') ? 'simple' : mode;
+		timeout = (typeof timeout === 'undefined') ? 5000 : timeout;
+		if (typeof text !== 'undefined') {
+			$mdToast.show(
+				$mdToast.simple()
+				.textContent(text)
+				.position('top')
+				.toastClass('alert-toast mode-'+mode)
+				.hideDelay(timeout)
+			);
+		}
+	}
+}]);
+
 popup.controller("popup", ['$scope', '$sce', '$http', function($scope, $sce, $http)
 {
 	var ctrl = this;

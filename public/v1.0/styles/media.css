@@ -1144,6 +1144,12 @@ table.termeklista > tbody > tr.opened > td:last-child{
 .center{
 	text-align:center;
 }
+.left{
+	text-align:left;
+}
+.right{
+	text-align:right;
+}
 
 button.watch i{
 	height:auto;
@@ -3466,3 +3472,222 @@ button.topup-button{
   margin-top: 15px;
   color: red;
 }
+.egyenleg-controller .topop-boxes{
+  padding-right: 20px;
+}
+.egyenleg-controller .topup-box{
+  background-color: white;
+}
+.egyenleg-controller .topup-box-divider{
+  display: block;
+  height: 20px;
+}
+
+.egyenleg-controller .topup-box .header{
+  background-color: #acacac;
+  padding: 0 15px;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  color: white;
+  font-size: 1.2em;
+}
+.egyenleg-controller .topup-box.by-cash .header{
+  background-color: #ff7676;
+}
+.egyenleg-controller .topup-box.by-view .header{
+  background-color: #2cabe3;
+}
+.egyenleg-controller .topup-box .ct-wrapper{
+  padding: 30px 20px;
+}
+.egyenleg-controller .order-cash{
+  margin-top: 30px;
+  text-align: center;
+}
+.egyenleg-controller .order-cash h2{
+  font-weight: bold;
+  font-size: 1.7em;
+  font-family: 'Oswald', sans-serif;
+}
+.egyenleg-controller .order-cash .cash{
+  font-size: 2.7em;
+  color: #ff533a;
+}
+.egyenleg-controller .order-cash .cash .small{
+  font-size: 0.45em;
+}
+.egyenleg-controller .order-cash .accept{
+  width: 50%;
+  height: 250px;
+  overflow: auto;
+  margin: 0 auto;
+  border: 3px solid #cdd2d6;
+  text-align: left;
+  font-size: 0.7em;
+  border-radius: 5px;
+  line-height: 1.2;
+}
+.egyenleg-controller .order-cash .accept p{
+  margin: 0;
+}
+.egyenleg-controller .order-cash .order-button .md-button {
+  background-color: rgb(255, 83, 58);
+  color: white;
+  padding: 5px 15px;
+  font-size: 1.2em;
+}
+.egyenleg-controller .order-cash md-checkbox:not([disabled]).md-checked .md-icon {
+    background-color: rgba(79, 193, 108, 0.87) !important;
+}
+.egyenleg-controller .package-box{
+  background-color: white;
+}
+.egyenleg-controller .package-box .header{
+  background-color: #818e9d;
+  padding: 0 15px;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  color: white;
+  font-size: 0.9em;
+}
+.egyenleg-controller .package-box .ct-wrapper{
+  text-align: center;
+  padding: 15px;
+  line-height: 1.2;
+}
+.egyenleg-controller .package-box .ct-wrapper .divider{
+  height: 2px;
+  margin: 10px 0;
+  background: #edf1f5;
+}
+.egyenleg-controller .package-box .pack-acticity strong{
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #ff533a;
+  margin-top: 5px;
+}
+.egyenleg-controller .package-box .free-cash-of .cash-price{
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #64c77e;
+  margin-top: 5px;
+}
+.egyenleg-controller .package-box .ord-views .view{
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #2cabe3;
+  margin-top: 5px;
+}
+ md-slider#view-slider .md-track.md-track-fill{
+   background-color: rgb(44, 171, 227) !important;
+ }
+ md-slider#view-slider .md-thumb:after{
+   border-color: rgb(44, 171, 227) !important;
+   background-color: rgb(44, 171, 227) !important;
+ }
+ md-slider#view-slider .md-focus-ring{
+   background-color: rgb(44, 171, 227, 0.3) !important;
+ }
+ .page-container > h2 {
+   font-weight: bold;
+   color: black;
+   margin: 40px 0 10px 0;
+   font-family: 'Oswald', sans-serif;
+ }
+ .page-container > h2 +.subtitle {
+    font-size: 1.1em;
+    color: #657484;
+    margin-left: 5px;
+ }
+ .table-stucture{
+   position: relative;
+   margin: 20px 0;
+   overflow: hidden;
+   border-radius: 3px;
+    box-shadow: 0 2px 20px -5px #b3c6d9;
+ }
+ .table-stucture.loading{
+   height: 300px;
+   background: #ffffff;
+ }
+ .table-stucture .load-overlay{
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 42px;
+   bottom: 0;
+   width: 100%;
+   z-index: 1;
+   background-color: rgba(184, 184, 184, 0.6);
+ }
+ .table-stucture .load-overlay .cont{
+   position: absolute;
+   color: white;
+   font-size: 1.2em;
+   text-align: center;
+   left: 50%;
+   top: 50%;
+   -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+ }
+ .table-stucture .tbl-row {
+   background-color: white;
+ }
+ .table-stucture .tbl-row > div {
+   padding: 10px;
+ }
+
+ .table-stucture .tbl-row.tbl-header {
+   border-bottom: 2px solid #c8d2dd;
+ }
+ .table-stucture .tbl-row.tbl-header > div {
+   font-weight: bold;
+   color: black;
+ }
+ .table-stucture .tbl-row:not(.tbl-header) {
+   border-bottom: 1px solid #f1f1f1;
+ }
+ .table-stucture .tbl-row:not(.tbl-header):nth-child(even) > div {
+   background-color: #f9f9f9;
+ }
+ .transaction-list .azon{
+   font-weight: bold;
+   color: #ff533a;
+   font-family: 'Oswald', sans-serif;
+ }
+ .transaction-list .hash{
+   color: #cecece;
+  font-style: italic;
+  font-size: 0.9em;
+ }
+ .transaction-list .cash{
+  color: #8c8e90;
+  font-size: 0.8em;
+ }
+ .transaction-list .stat{
+  font-weight: bold;
+ }
+ .transaction-list .stat .stat-done{
+  color: #77c982;
+ }
+ .transaction-list .stat .stat-inprogress{
+  color: #ff8729;
+ }
+ .transaction-list .stat .stat-deleted{
+  color: #ff7676;
+ }
+ .transaction-list .cash strong{
+   font-size: 1.2em;
+   color: black;
+ }
+
+ .blured{
+   filter:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="5" /></filter></svg>#filter');
+ -webkit-filter:blur(5px);
+         filter:blur(5px)
+ }
+ md-toast{
+   position: fixed !important;
+ }
